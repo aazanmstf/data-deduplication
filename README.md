@@ -134,10 +134,6 @@ This is an academic/demo project and is intended for local use. Before any produ
 - Add file hashing for stronger duplicate detection
 - Containerize the application with Docker Compose
 
-## Interview Explanation
-
-> I built a Java web application that demonstrates data deduplication and controlled file sharing. JSP pages provide the interface, Servlets process user actions, and MySQL stores users, owners, file records, access keys, key requests, download counts, and simulated attack records. A data owner uploads a file, users request access, the owner approves the request, and the authorized user can download the file using the required keys. The project also tracks download activity and records unauthorized access attempts. It is designed as a local academic demonstration and runs on Apache Tomcat 7 with Java 8 and MySQL.
-
 ## License
 
 This repository is provided for educational and portfolio purposes.
