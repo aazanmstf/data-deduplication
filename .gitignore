@@ -1,0 +1,6 @@
+build/
+.settings/
+.metadata/
+*.bak
+*.sql
+src/com/DBConnect/Dataduplicate/DbConnection.java
