@@ -1,0 +1,12 @@
+Data Deduplication Demonstration File
+
+Project: Secure Cloud Storage Demonstration
+Owner: Demo Data Owner
+Classification: Sample data only
+
+This file is intentionally small and contains no personal information.
+It is used to demonstrate uploading, duplicate detection, key requests,
+approval, controlled download, and download tracking.
+
+Record 001: File storage is reduced when duplicate content is detected.
+Record 002: Access is controlled through approval and generated keys.

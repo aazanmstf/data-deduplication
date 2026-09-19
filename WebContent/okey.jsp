@@ -114,18 +114,7 @@ tr:nth-child(even) {
 						System.out.println("hii id ="+uid);
 				%> --%>
 				<%
-    Cookie[] cookies = request.getCookies();
-    String name = null;
-    String uid = null;
-    for (Cookie cookie : cookies) {
-        if (cookie.getName().equals("name")) {
-            name = cookie.getValue();
-        } else if (cookie.getName().equals("uid")) {
-            uid = cookie.getValue();
-        }
-    }
-    System.out.println("hii " + name);
-    System.out.println("hii id =" + uid);
+    String uid = (String) request.getSession(false).getAttribute("uid");
 %>
 				
 				<%
@@ -156,7 +145,7 @@ tr:nth-child(even) {
 							<td><%=fid%></td>
 							<td><%=uname%></td>
 							<td><%=da%></td>
-							<td><a href="Send?fid=<%=fid%>&&uid=<%=uname%>"
+							<td><a href="Send?fid=<%=fid%>&&uid=<%=da%>"
 								class="actions">SHARE KEYS</a></td>
 						</tr>
 					</tbody>

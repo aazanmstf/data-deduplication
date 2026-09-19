@@ -121,7 +121,7 @@ public class OwnerReg extends HttpServlet {
 	public static Connection getConn() throws ClassNotFoundException, SQLException {
 		Connection con=null;
 		Class.forName("com.mysql.jdbc.Driver");
-		return con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Datadeduplication-2024", "root", "root");
+		return DbConnection.connect();
 		
 	}
 	

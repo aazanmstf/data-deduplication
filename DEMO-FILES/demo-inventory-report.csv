@@ -1,0 +1,4 @@
+record_id,department,item,quantity,status
+DD-1001,Research,Storage nodes,12,Available
+DD-1002,Security,Access keys,25,Controlled
+DD-1003,Operations,Backup copies,4,Verified
