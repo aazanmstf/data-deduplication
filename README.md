@@ -2,138 +2,93 @@
 
 Java · JSP · Servlets · Apache Tomcat 7 · MySQL
 
-A Java web application that demonstrates secure file storage with data deduplication, role-based workflows, key-controlled access, and download monitoring. The system stores a file once, records its metadata and keys in MySQL, and manages requests from owners, users, administrators, proxy servers, and simulated malicious users.
-
-## Overview
-
-Duplicate file storage increases database and cloud-storage cost. This project models a data-deduplication workflow in which uploaded files are identified by a file ID, stored with access keys, and made available to approved users through controlled download flows.
-
-The application is implemented as a traditional Java web application: JSP pages provide the user interface, Servlets handle requests, and MySQL stores user, owner, key-request, upload, and monitoring data. It runs locally on Apache Tomcat 7.
-
-## Architecture
-
-```text
-Browser
-   |
-   v
-JSP pages (WebContent/)
-   |
-   v
-Java Servlets (src/com/servlets/)
-   |
-   v
-Database helper and JavaBeans
-   |
-   v
-MySQL: datadeduplication-2024
-```
+A Java web application that demonstrates secure file storage through data deduplication, controlled key sharing, role-based workflows, and download monitoring.
 
 ## Features
 
-- User and data-owner registration and login workflows
-- File upload and duplicate-file storage records
-- File IDs and two-part key-based download access
-- User key requests and owner approval flow
-- File search, file listing, and download pages
-- Download-count tracking and attack-record tracking
-- Administrative, proxy-server, and malicious-user demonstration roles
-- JSP-based interface with Java Servlet request handling
+- Data-owner and user registration/login
+- File upload with duplicate-file detection
+- File ID generation and two-part access keys
+- Search, key-request, owner approval, and controlled download flow
+- Download-attempt and unauthorized-access monitoring
+- Data Manager, Proxy Server, and Malicious User demonstration roles
+- Admin monitoring pages for stored files, users, owners, and attack records
 
-## Roles
+## Technology Used
 
-| Role | Main responsibility |
-| --- | --- |
-| Data Owner | Uploads files, reviews access requests, and shares keys. |
-| User | Registers, requests access keys, searches, and downloads authorized files. |
-| Data Manager / Admin | Reviews registered users and manages project data. |
-| Proxy Server | Demonstration role for proxy-server login and file-access flows. |
-| Malicious User | Demonstration role used to record attempted unauthorized access. |
+- Java 8
+- JSP and Java Servlets
+- Apache Tomcat 7
+- MySQL 5.5+ / compatible MySQL server
+- HTML, CSS, JavaScript, Bootstrap
 
-## Repository Structure
+## Run Locally
 
-```text
-Data-depulication-2024/
-├── src/
-│   ├── Algorithm/                 # Deduplication-related helper logic
-│   ├── com/beans/                 # JavaBeans for users, owners, keys, and attacks
-│   ├── com/dao/                   # Data-access objects
-│   ├── com/DBConnect/             # MySQL database helper
-│   └── com/servlets/              # Servlet endpoints
-├── WebContent/
-│   ├── WEB-INF/
-│   │   ├── lib/                   # MySQL Connector/J, Gson, Servlet/JSP APIs
-│   │   └── web.xml                # Web application configuration
-│   ├── asset/                     # CSS, JavaScript, fonts, and images
-│   └── *.jsp                      # Application pages
-├── .project                       # Eclipse project metadata
-├── .classpath                     # Eclipse classpath metadata
-└── README.md
+### 1. Create the database
+
+The repository includes a safe empty schema. It contains no real accounts, passwords, or uploaded files.
+
+From the project folder, run:
+
+```powershell
+mysql -u root -p < database/demo-schema.sql
 ```
 
-## Requirements
+### 2. Configure database access
 
-- JDK 8
-- Apache Tomcat 7
-- MySQL 5.5 or a compatible MySQL server
-- Eclipse IDE for Enterprise Java or VS Code with Java extensions
+Copy:
 
-## Local Setup
+```text
+src/com/DBConnect/Dataduplicate/DbConnection.java.example
+```
 
-1. Import the safe, empty database schema from `database/demo-schema.sql`. It contains no passwords or personal data. From the project folder, run: `mysql -u root -p < database/demo-schema.sql`.
-2. Create a local MySQL database named `datadeduplication-2024`.
-3. Copy `src/com/DBConnect/Dataduplicate/DbConnection.java.example` to `DbConnection.java`.
-4. In `DbConnection.java`, set your own local MySQL username and password. Never commit your real password.
-5. Configure Tomcat 7 in Eclipse, or deploy `WebContent` and compiled classes to a Tomcat installation.
-6. Start Tomcat and open:
+to:
+
+```text
+src/com/DBConnect/Dataduplicate/DbConnection.java
+```
+
+Then set your own local MySQL username and password in `DbConnection.java`. Do not commit this file.
+
+### 3. Deploy and start
+
+Configure the project in Eclipse with Tomcat 7, or deploy `WebContent` and compiled classes to Tomcat.
+
+Open:
 
 ```text
 http://localhost:8084/Data-depulication-2024/
 ```
 
-## Database Tables
+If Tomcat and MySQL are installed as Windows services, run `START-AND-CHECK.ps1` as Administrator to start and verify the project.
 
-The application uses these main tables:
+## Demonstration Flow
 
-| Table | Purpose |
-| --- | --- |
-| `user` | Registered users and their approval/login state. |
-| `owner` | Data-owner account information. |
-| `upload` / `upload1` | File metadata, contents, and access keys. |
-| `ukeys` | Keys shared with authorized users. |
-| `keyreq` | Pending and approved file-key requests. |
-| `fcount` | Per-user download-count data. |
-| `attack` | Recorded unauthorized-access attempts. |
+1. Register and log in as a Data Owner.
+2. Upload a small sample text file from `DEMO-FILES`.
+3. Register and log in as a User.
+4. Search for the uploaded file and request the access keys.
+5. Log in as the Data Owner, approve the request, and share the keys.
+6. Log in again as the User and download with the file ID and keys.
+7. Use the monitoring roles to view download attempts and attack records.
 
-## Run Locally
+## Repository Structure
 
-With Tomcat configured as a Windows service:
-
-```powershell
-Start-Process "http://localhost:8084/Data-depulication-2024/"
+```text
+src/                 Java Servlets, JavaBeans, DAO, and database helper
+WebContent/          JSP pages, front-end assets, and Tomcat configuration
+database/            Safe empty MySQL demo schema
+DEMO-FILES/          Sample files and walkthrough for demonstrations
+START-AND-CHECK.ps1  Local service/startup verification script
 ```
 
-Or start the configured Tomcat server from Eclipse and run the project on the Tomcat 7 server.
+## Important Notes
 
-## Security Notes
-
-This is an academic/demo project and is intended for local use. Before any production use, improve password handling, replace SQL string concatenation with parameterized queries everywhere, add input validation and authorization checks, use HTTPS, and move configuration/secrets out of source code.
-
-## Limitations
-
-- The project is a local demonstration, not a production cloud-storage platform.
-- It uses a legacy Java/JSP/Tomcat stack for academic-project compatibility.
-- The data-deduplication workflow is represented through database records and access-key flows; it is not a distributed storage engine.
-- No public deployment URL is provided; the project runs on local Tomcat.
-
-## Future Improvements
-
-- Replace legacy JSP scriptlets with MVC controllers and template views
-- Upgrade to a supported Java, Tomcat, and MySQL version
-- Add password hashing and role-based authorization middleware
-- Add automated tests and a GitHub Actions workflow
-- Add file hashing for stronger duplicate detection
-- Containerize the application with Docker Compose
+- This is an academic/local demonstration project, not a production cloud-storage platform.
+- GitHub Pages displays the project documentation only; the full JSP application requires local Tomcat and MySQL.
+- Use dummy accounts and sample files only.
+- Before production use, add password hashing, parameterized queries, stronger authorization checks, HTTPS, modern dependency versions, and automated tests.
 
 ## License
 
-This repository is provided for educational and portfolio purposes.
+Provided for educational and portfolio purposes.
