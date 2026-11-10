@@ -110,7 +110,7 @@
                    
                     
                  <li>
-                        <a class="page-scroll" style="color:green"font-size:50px" href="StoredInfo.jsp">Data Stored Information</a>
+                        <a class="page-scroll" style="color:green"font-size:50px" href="StoredInfo">Data Stored Information</a>
                     </li>
                     <li>
                         <a class="page-scroll" style="color:green"font-size:50px" href="aowner.jsp">Data Owner Details</a>

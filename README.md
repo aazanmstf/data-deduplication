@@ -79,7 +79,7 @@ Data-depulication-2024/
 
 ## Local Setup
 
-1. Import the database schema and sample data from the provided `Data deduplication.sql` file. This database export is intentionally excluded from Git for safety.
+1. Import the safe, empty database schema from `database/demo-schema.sql`. It contains no passwords or personal data. From the project folder, run: `mysql -u root -p < database/demo-schema.sql`.
 2. Create a local MySQL database named `datadeduplication-2024`.
 3. Copy `src/com/DBConnect/Dataduplicate/DbConnection.java.example` to `DbConnection.java`.
 4. In `DbConnection.java`, set your own local MySQL username and password. Never commit your real password.

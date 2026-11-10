@@ -60,7 +60,7 @@ public class UserReg extends HttpServlet {
         if(name == null || name.trim().equals("")) {
             request.setAttribute("error", "Please enter a valid name.");
           
-            request.getRequestDispatcher("inner.jsp").forward(request, response);
+            request.getRequestDispatcher("Register.jsp").forward(request, response);
             return;
         }
         else if(email == null || email.trim().equals("")) {
@@ -73,10 +73,14 @@ public class UserReg extends HttpServlet {
             request.getRequestDispatcher("Register.jsp").forward(request, response);
             return;
         }
-            else if(age == null || age.trim().equals("") || Integer.parseInt(age)<18) {
-            request.setAttribute("error", "Please enter a valid age.");
-            request.getRequestDispatcher("Register.jsp").forward(request, response);
-            return;
+        else {
+            try {
+                if (age == null || Integer.parseInt(age.trim()) < 18) throw new NumberFormatException();
+            } catch (NumberFormatException e) {
+                request.setAttribute("error", "Please enter a valid age (18 or older).");
+                request.getRequestDispatcher("Register.jsp").forward(request, response);
+                return;
+            }
         }
        /* int ageInt = 0;
         try {
@@ -89,12 +93,12 @@ public class UserReg extends HttpServlet {
             request.getRequestDispatcher("owner.jsp").forward(request, response);
             return;
         }*/
-            else if(gen == null || (!gen.equalsIgnoreCase("male") && !gen.equalsIgnoreCase("female"))) {
+        if(gen == null || (!gen.equalsIgnoreCase("male") && !gen.equalsIgnoreCase("female"))) {
             request.setAttribute("error", "Please select a valid gender.");
             request.getRequestDispatcher("Register.jsp").forward(request, response);
             return;
         }
-            else  if(pass == null || pass.trim().equals("")) {
+        if(pass == null || pass.trim().equals("")) {
             request.setAttribute("error", "Please enter a valid password.");
             request.getRequestDispatcher("Register.jsp").forward(request, response);
             return;

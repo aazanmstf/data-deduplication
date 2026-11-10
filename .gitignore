@@ -3,4 +3,5 @@ build/
 .metadata/
 *.bak
 *.sql
+!database/demo-schema.sql
 src/com/DBConnect/Dataduplicate/DbConnection.java

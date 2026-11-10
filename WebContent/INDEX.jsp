@@ -66,7 +66,7 @@
             </ul>
           </li> 
           <li><a href="ProxyserverLogin.jsp">PROXY DATA CENTER</a></li>
-           <li class="dropdown"><a href="about.html"><span>USER</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+           <li class="dropdown"><a href="#"><span>USER</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="Register.jsp">REGISTER</a></li>
               <li><a href="UserLogin1.jsp">LOGIN</a></li>
@@ -159,7 +159,7 @@
 
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
             <p>By leveraging convergent encryption, and Merkle tree chal-lenges for proof of ownership, our solution ensures that data deduplication does not compromise data privacy or security. </p>
-            <a href="about.html" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+            <a href="#services" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
           </div>
 
         </div>
