@@ -62,6 +62,26 @@ http://localhost:8084/Data-depulication-2024/
 
 If Tomcat and MySQL are installed as Windows services, run `START-AND-CHECK.ps1` as Administrator to start and verify the project.
 
+## Open and Run with VS Code
+
+1. Open **VS Code**.
+2. Select **File → Open Folder** and choose the project folder.
+3. Open **Terminal → New Terminal** in VS Code.
+4. To open the already deployed application, run:
+
+```powershell
+Start-Process "http://localhost:8084/Data-depulication-2024/"
+```
+
+If the page does not open, close VS Code, reopen it as **Administrator**, then run:
+
+```powershell
+Set-ExecutionPolicy -Scope Process Bypass -Force
+.\START-AND-CHECK.ps1
+```
+
+VS Code is used to view and edit the source code. Apache Tomcat runs the Java/JSP application and MySQL stores its data.
+
 ## Demonstration Flow
 
 1. Register and log in as a Data Owner.
